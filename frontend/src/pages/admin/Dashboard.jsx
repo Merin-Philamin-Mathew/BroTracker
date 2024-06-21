@@ -5,9 +5,9 @@ import Footer from '../../components/partials/admin/Footer/Footer'
 function Dashboard() {
   return (
     <div>
-      <Header/>
-      
-      <Footer/>
+      <Header />
+
+      <Footer />
     </div>
   )
 }
