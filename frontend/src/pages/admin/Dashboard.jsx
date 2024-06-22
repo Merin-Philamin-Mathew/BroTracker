@@ -10,7 +10,9 @@ function Dashboard() {
     <>
       <Header />
       <Container>
-        <Table />
+        <div className='mt-5 mb-5'>
+          <Table />
+        </div>
 
       </Container>
       <Footer />
