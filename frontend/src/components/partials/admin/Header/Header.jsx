@@ -12,9 +12,10 @@ function Header() {
         </a>
       </div>
     
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm font-semibold leading-6 text-zinc-50">Log in <span aria-hidden="true">&rarr;</span></a>
-      </div>
+      <div class=" lg:flex lg:justify-end">
+        {/* <a href="#" class="text-sm font-semibold leading-6 text-zinc-50">Log in <span aria-hidden="true">&rarr;</span></a> */}
+        <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="\assets\nikhil.jpg" alt="Bordered avatar"/>      
+        </div>
     </nav>
     
   </header>
