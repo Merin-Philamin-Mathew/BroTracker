@@ -14,13 +14,20 @@ function Dashboard() {
     <>
       <Header />
       <Container>
+        <div className='text-white mt-10 mb-10'>
+          <h2 className='text-3xl'>Student List</h2>
+          <p>Track your student progress</p>
+        </div>
         <div className='mt-5 mb-5'>
-          <Filters/>
+          <div className='mb-3'>
+            <Filters />
+          </div>
           <Table />
         </div>
-
       </Container>
-      <Footer />
+      <div className='mt-10'>
+        <Footer />
+      </div>
     </>
   )
 }

@@ -7,7 +7,7 @@ function App() {
   let routerProvider = createBrowserRouter(const_data.REACT_ROUTER_PATH)
 
   return (
-    <div >
+    <div className="bg-gray-800">
       <RouterProvider router={routerProvider} />
     </div>
   );
