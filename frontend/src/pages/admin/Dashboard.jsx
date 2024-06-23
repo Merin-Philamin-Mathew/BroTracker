@@ -5,20 +5,29 @@ import Table from '../../components/table/Table'
 import Container from '../../components/utils/Container'
 import Dropdown from '../../components/utils/Dropdown'
 import Filters from '../../components/partials/admin/Filter_bar/Filters'
+import const_data from '../../config/constant'
 // import Container from '../../components/utils/Container'
 
 function Dashboard() {
+
   return (
     <>
       <Header />
       <Container>
+        <div className='text-white mt-10 mb-10'>
+          <h2 className='text-3xl'>Student List</h2>
+          <p>Track your student progress</p>
+        </div>
         <div className='mt-5 mb-5'>
-          <Filters/>
+          <div className='mb-3'>
+            <Filters />
+          </div>
           <Table />
         </div>
-
       </Container>
-      <Footer />
+      <div className='mt-10'>
+        <Footer />
+      </div>
     </>
   )
 }
