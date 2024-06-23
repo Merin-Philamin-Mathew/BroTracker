@@ -11,10 +11,11 @@ function UserRegisterForm() {
         try{
             const batchesArray = []
             const querySnapshot = await getDocs(collection(db, "batch"))
-            console.log("haiii")
+            const batchesd= querySnapshot.docs
+            console.log("haiii",batchesd)
             querySnapshot.forEach((doc)=>{
                 batchesArray.push(doc.data().name)
-                console.log(doc.data().name)
+                console.log(batches)
             })
             setBatches(batchesArray)
             

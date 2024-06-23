@@ -9,13 +9,13 @@ import { getFirestore } from "firebase/firestore";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_BROTRACKER_APIKEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_BROTRACKER_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_BROTRACKER_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_BROTRACKER_MESSAGIN_SENDER_ID,
-  appId: process.env.FIREBASE_BROTRACKER_APP_ID,
-  measurementId: process.env.FIREBASE_BROTRACKER_MESSUREMENT_ID
+  apiKey: process.env.REACT_APP_BROTRACKER_APIKEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_BROTRACKER_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_BROTRACKER_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_BROTRACKER_MESSAGIN_SENDER_ID,
+  appId: process.env.REACT_APP_BROTRACKER_APP_ID,
+  measurementId: process.env.REACT_APP_BROTRACKER_MESSUREMENT_ID
 };
 
 // Initialize Firebase
