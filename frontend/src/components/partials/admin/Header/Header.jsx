@@ -5,10 +5,10 @@ function Header() {
   return (
     <header class="bg-zinc-50 text-center dark:bg-neutral-900">
       <Container>
-        <nav class="flex py-5 w-full max-w-7xl items-center justify-between" aria-label="Global">
+        <nav class="flex py-5 px-2 items-center justify-between" aria-label="Global">
           <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5">
-              <span class="sr-only">Your Company</span>
+              {/* <span class="sr-only">Your Company</span> */}
               <img class="h-8 w-auto" src="/assets/logo (2).png" alt="" />
             </a>
           </div>
