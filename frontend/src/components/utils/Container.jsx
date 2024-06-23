@@ -8,4 +8,4 @@ function Container({ children }) {
   )
 }
 
-export default Containe
+export default Container
