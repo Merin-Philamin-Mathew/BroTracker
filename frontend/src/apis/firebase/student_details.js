@@ -1,6 +1,6 @@
 // add student api
 
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import db from "../../config/firebase_config";
 import const_data from "../../config/constant";
 
@@ -33,6 +33,17 @@ function getAllStudentProfile() {
 }
 
 
+// get single student api
+function getSingleStudentProfile(student_id, successCallback, errorCallback) {
 
+    let docs = doc(db, const_data.FB_STUDENT_COLLECTION_NAME, student_id);
+    getDoc(docs).then((student_docs) => {
+        let student = student_docs.data();
+        successCallback(student)
+    }).catch((err) => {
+        console.log(err);
+        errorCallback("Something went wrong")
+    })
+}
 
-export { addStudent }
+export { addStudent, getAllStudentProfile, getSingleStudentProfile }
