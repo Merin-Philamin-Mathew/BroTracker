@@ -1,5 +1,5 @@
 import const_data from "./config/constant";
-import Dashboard from "./pages/admin/Dashboard";
+// import Dashboard from "./pages/admin/Dashboard";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   let routerProvider = createBrowserRouter(const_data.REACT_ROUTER_PATH)
 
   return (
-    <div >
+    <div className="bg-gray-800">
       <RouterProvider router={routerProvider} />
     </div>
   );
