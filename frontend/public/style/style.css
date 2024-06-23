@@ -1,0 +1,6 @@
+@media(max-width:404px) {
+    .lessThan404 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
