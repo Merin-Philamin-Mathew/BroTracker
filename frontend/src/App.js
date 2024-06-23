@@ -1,5 +1,5 @@
 import const_data from "./config/constant";
-import Dashboard from "./pages/admin/Dashboard";
+// import Dashboard from "./pages/admin/Dashboard";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 function App() {
