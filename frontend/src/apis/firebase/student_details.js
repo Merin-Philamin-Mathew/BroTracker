@@ -1,8 +1,10 @@
-// add student api
-
 import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import db from "../../config/firebase_config";
 import const_data from "../../config/constant";
+
+
+
+// add student api
 
 async function addStudent(student_data) {
     try {
