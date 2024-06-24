@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { addStudent, getBatch } from '../../apis/firebase/student_details';
+import { addStudent } from '../../apis/firebase/student_details';
+import { getBatch } from '../../apis/firebase/batch_details';
 import { userRegForm_Data } from './data';
 
 
