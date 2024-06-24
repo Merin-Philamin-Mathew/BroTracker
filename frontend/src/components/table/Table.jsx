@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getAllStudentProfile } from '../../apis/firebase/student_details'
 
 function Table() {
-
+ 
     const [student_details, setStudent_details] = useState([])
 
     useEffect(()=>{
@@ -13,8 +13,7 @@ function Table() {
             console.log(e.status,e.msg)
         })
     },[])
-    
-
+ 
     return (
         <>
             <div class="relative overflow-x-auto">
@@ -54,7 +53,7 @@ function Table() {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        { 
                             student_details.map((student) => {
                                 return (
                                     <tr class="bg-white odd:bg-gray-800 border-b even:bg-gray-700 dark:border-gray-700">
@@ -65,7 +64,7 @@ function Table() {
                                             {student.batch}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {}
+                                          
                                         </td>
                                         <td class="px-6 py-4">
                                             $2999
