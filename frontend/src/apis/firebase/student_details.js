@@ -1,8 +1,27 @@
-// add student api
-
 import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import db from "../../config/firebase_config";
 import const_data from "../../config/constant";
+
+
+// get batch
+async function getBatch() {
+    try{
+        const batchesArray = []
+        const querySnapshot = await getDocs(collection(db, "batch"))
+        const batches= querySnapshot.docs
+        querySnapshot.forEach((doc)=>{
+            batchesArray.push(doc.data().name)
+        })
+        return batchesArray
+        
+    }catch (error){
+        console.error('Error fetching batches:',error)
+    }
+}
+
+// add student api
+
+
 
 async function addStudent(student_data) {
     try {
@@ -46,4 +65,4 @@ function getSingleStudentProfile(student_id, successCallback, errorCallback) {
     })
 }
 
-export { addStudent, getAllStudentProfile, getSingleStudentProfile }
+export { addStudent, getAllStudentProfile, getSingleStudentProfile , getBatch}
