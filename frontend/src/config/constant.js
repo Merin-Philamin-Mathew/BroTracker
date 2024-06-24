@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import Dashboard from '../pages/admin/Dashboard';
-import UserRegisterForm from '../sections/forms/UserRegisterForm';
 import AddStudent from '../pages/admin/AddStudent';
 import Container from '../components/utils/Container';
 
