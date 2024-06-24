@@ -14,7 +14,7 @@ let userRegForm_Data = {
 
     VALIDATION_SCHEMA: Yup.object().shape({
         firstName: Yup.string()
-          .max(15, 'Must be 15 characters or less')
+          .max(20, 'Must be 15 characters or less')
           .required('Required'),
         lastName: Yup.string()
           .max(20, 'Must be 20 characters or less')
@@ -24,12 +24,12 @@ let userRegForm_Data = {
         phoneNumber: Yup.number()
         .test('length', 'Must be 10 characters',(val)=>val && val.toString().length == 10),
         githubUsername: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .max(30, 'Must be 20 characters or less')
             .required('Required'),
         batch: Yup.string()
             .required('Required'),
         leetcodeUsername: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .max(30, 'Must be 20 characters or less')
             .required('Required'),
         monkeytypingUsername: Yup.string()
             .max(20, 'Must be 20 characters or less')

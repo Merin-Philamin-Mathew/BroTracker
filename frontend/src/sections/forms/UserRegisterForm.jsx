@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { addStudent } from '../../apis/firebase/student_details';
 import { getBatch } from '../../apis/firebase/batch_details';
 import { userRegForm_Data } from './data';
+import { getGitHUb } from '../../apis/firebase/gitHub_details';
 
 
 
@@ -25,8 +26,15 @@ function UserRegisterForm() {
             validationSchema={userRegForm_Data.VALIDATION_SCHEMA}
             onSubmit={async (val)=>{
                 try{
-                    await addStudent(val)
-                    alert("Form has been submitted")
+                    console.log(val)
+                    const git_details = await getGitHUb(val.githubUsername)
+                    console.log(git_details)
+                    if (git_details.status){
+                           await addStudent(val)
+                           alert("Form has been submitted")
+                    }else{
+                        alert("no git user")
+                    }
                 }
                 catch(e){
                     console.log("Error:",e)
