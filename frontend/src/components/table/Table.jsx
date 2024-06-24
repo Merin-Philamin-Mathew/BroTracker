@@ -12,16 +12,34 @@ function Table() {
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Product name
+                                Student Name
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Color
+                                Batch
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Category
+                            <img
+                            className="h-9 w-9"
+                            title='github'
+                            src="\assets\github.png"
+                            alt="nature image"
+                            />
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Price
+                            <img
+                            className="h-9 w-8"
+                            title='leetcode'
+                            src="\assets\LeetCode_logo_white.png"
+                            alt="nature image"
+                            />
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                            <img
+                            className="h-9 w-9 object-cover rounded-full"
+                            title='monkeytype'
+                            src="\assets\monkeytype.png"
+                            alt="nature image"
+                            />
                             </th>
                         </tr>
                     </thead>
