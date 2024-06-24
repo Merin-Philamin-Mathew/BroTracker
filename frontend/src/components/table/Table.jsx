@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getAllStudentProfile } from '../../apis/firebase/student_details'
 
 function Table() {
 
+    const [student_details, setStudent_details] = useState([])
 
-    let fill = new Array(10).fill({})
+    useEffect(()=>{
+        getAllStudentProfile().then((data)=>{
+            setStudent_details(data.student_list)
+    
+        }).catch((e)=>{
+            console.log(e.status,e.msg)
+        })
+    },[])
+    
 
     return (
         <>
@@ -45,17 +55,17 @@ function Table() {
                     </thead>
                     <tbody>
                         {
-                            fill.map((each) => {
+                            student_details.map((student) => {
                                 return (
                                     <tr class="bg-white odd:bg-gray-800 border-b even:bg-gray-700 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            Apple MacBook Pro 17"
+                                        <th scope="row" class="px-6 py-4 font-medium capitalize text-gray-900 whitespace-nowrap dark:text-white">
+                                            {student.firstName + " " + student.lastName} 
                                         </th>
                                         <td class="px-6 py-4">
-                                            Silver
+                                            {student.batch}
                                         </td>
                                         <td class="px-6 py-4">
-                                            Laptop
+                                            {}
                                         </td>
                                         <td class="px-6 py-4">
                                             $2999
