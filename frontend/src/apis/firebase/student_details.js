@@ -23,6 +23,7 @@ function getAllStudentProfile() {
         getDocs(collection(db, const_data.FB_STUDENT_COLLECTION_NAME)).then((querySnapShot) => {
             let student_data = querySnapShot.docs
             let all_students = student_data.map((each) => each.data());
+            let statusCode = q
             resolve({ status: true, student_list: all_students })
         }).catch((err) => {
             console.log(err);
@@ -57,6 +58,7 @@ async function getProfileStatus(username = "Merin-Philamin-Mathew") {
 
         let apiCall = await fetch(`https://api.github.com/users/${username}/events`);
         let data = await apiCall.json()
+
 
         data.forEach((each) => {
             if (each.type == "PushEvent") {
