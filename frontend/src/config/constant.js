@@ -30,8 +30,10 @@ let const_data = {
             ]
         }
     ],
+   
     BROTO_BATCH: ['BCE118', 'BCE146'],
     BROTO_HUB: ['Kochi','Calicut']
 }
+ 
 
-export default const_data;
+export default const_data 
