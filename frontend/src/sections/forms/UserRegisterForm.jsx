@@ -3,7 +3,6 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { addStudent } from '../../apis/firebase/student_details';
 import { getBatch } from '../../apis/firebase/batch_details';
 import { userRegForm_Data } from './data';
-import { getGitHUb } from '../../apis/firebase/gitHub_details';
 import { accountValidator } from '../../apis/firebase/account_validator';
 import { GIT_URL_INSTANCE, LEETCODE_URL_INSTANCE, MONKEYTYPE_URL_INSTANCE } from '../../apis/axios_instance';
 import const_data from '../../config/constant';
@@ -31,9 +30,9 @@ function UserRegisterForm() {
             onSubmit={async (val)=>{
                 try{
                    
-                    const git_details = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.profile(val.githubUsername))
+                    const git_details = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.events(val.githubUsername))
 
-                    const leetCode_details = await accountValidator(LEETCODE_URL_INSTANCE, URLS.LEETCODE.profile(val.leetcodeUsername))
+                    const leetCode_details = await accountValidator(LEETCODE_URL_INSTANCE, URLS.LEETCODE.calender(val.leetcodeUsername))
                     const monkeyType_details = await accountValidator(MONKEYTYPE_URL_INSTANCE, URLS.MONKEYTYPE.profile(val.monkeytypingUsername))
                     console.log(monkeyType_details);
                     
@@ -47,8 +46,50 @@ function UserRegisterForm() {
                         alert("no mt user")
                     }
                     else{
+                        
+                        console.log(val)
+                        console.log("git",git_details);
+                        console.log("leet",leetCode_details.data.submissionCalendar);
+                        console.log("mt",monkeyType_details.data.data.personalBests.time);
+                        
+
+
+                        function monkeyTypePerformance(data) {
+                            const times = Object.values(data.personalBests.time);
+                            
+                            let totalAcc = 0, totalConsistency = 0, totalWpm = 0, totalCount = 0;
+                            
+                            times.forEach(timeArray => {
+                              timeArray.forEach(entry => {
+                                totalAcc += entry.acc;
+                                totalConsistency += entry.consistency;
+                                totalWpm += entry.wpm;
+                                totalCount += 1;
+                              });
+                            });
+                          
+                            const avgAcc = totalAcc / totalCount;
+                            const avgConsistency = totalConsistency / totalCount;
+                            const avgWpm = totalWpm / totalCount;
+                          
+                            return {
+                              avgAcc,
+                              avgConsistency,
+                              avgWpm
+                            };
+                          }
+                          
+                          const averages = monkeyTypePerformance(monkeyType_details.data.data);
+                         
+                          val.monkeytypeDetails.accuracy = averages.avgAcc
+                          val.monkeytypeDetails.consistency = averages.avgConsistency
+                          val.monkeytypeDetails.typing_speed = averages.avgWpm
+
+
                         await addStudent(val)
+
                         alert("Form has been submitted")
+
                     }
                 }
                 catch(e){

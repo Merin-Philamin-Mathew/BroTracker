@@ -10,6 +10,26 @@ let userRegForm_Data = {
         githubUsername:'Merin-Philamin-Mathew',
         leetcodeUsername: 'MerinMathew19',
         monkeytypingUsername: 'merinmathew19',
+        githubDetails: {
+          push: '',
+          pull: '',
+          commits: '',
+          active_days: []
+        },
+        leetcodeDetails: {
+          problems : {
+            hard: '',
+            medium: '',
+            easy: '',
+          },
+          badges : '',
+          active_days: []
+        },
+        monkeytypeDetails: {
+          consistency: '',
+          accuracy: '',
+          typing_speed: '',
+        },
     },
 
     VALIDATION_SCHEMA: Yup.object().shape({
