@@ -4,6 +4,10 @@ import { addStudent } from '../../apis/firebase/student_details';
 import { getBatch } from '../../apis/firebase/batch_details';
 import { userRegForm_Data } from './data';
 import { getGitHUb } from '../../apis/firebase/gitHub_details';
+import { accountValidator } from '../../apis/firebase/account_validator';
+import { GIT_URL_INSTANCE, LEETCODE_URL_INSTANCE, MONKEYTYPE_URL_INSTANCE } from '../../apis/axios_instance';
+import const_data from '../../config/constant';
+import URLS from '../../apis/urls';
 
 
 
@@ -26,14 +30,25 @@ function UserRegisterForm() {
             validationSchema={userRegForm_Data.VALIDATION_SCHEMA}
             onSubmit={async (val)=>{
                 try{
-                    console.log(val)
-                    const git_details = await getGitHUb(val.githubUsername)
-                    console.log(git_details)
-                    if (git_details.status){
-                           await addStudent(val)
-                           alert("Form has been submitted")
-                    }else{
+                   
+                    const git_details = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.profile(val.githubUsername))
+
+                    const leetCode_details = await accountValidator(LEETCODE_URL_INSTANCE, URLS.LEETCODE.profile(val.leetcodeUsername))
+                    const monkeyType_details = await accountValidator(MONKEYTYPE_URL_INSTANCE, URLS.MONKEYTYPE.profile(val.monkeytypingUsername))
+                    console.log(monkeyType_details);
+                    
+                    if (!git_details.status){
                         alert("no git user")
+                    }
+                    else if (leetCode_details?.data?.errors){
+                        alert("no leet user")
+                    }
+                    else if (!monkeyType_details.status){
+                        alert("no mt user")
+                    }
+                    else{
+                        await addStudent(val)
+                        alert("Form has been submitted")
                     }
                 }
                 catch(e){
