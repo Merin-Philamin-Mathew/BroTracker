@@ -3,7 +3,7 @@ import Container from '../../../utils/Container'
 
 function Header() {
   return (
-    <header class="bg-zinc-50 text-center dark:bg-neutral-900">
+    <header class="bg-zinc-50 text-center dark:bg-gray-900">
       <Container>
         <nav class="flex py-5 px-2 items-center justify-between" aria-label="Global">
           <div class="flex lg:flex-1">
