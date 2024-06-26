@@ -1,11 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { getAllStudentProfile } from '../../apis/firebase/student_details'
 import GraphCalender from '../utils/GraphCalender'
+import Data_Section from '../data_section/Data_Section'
 
 function Table() {
 
     const [student_details, setStudent_details] = useState([])
 
+    const icons = [
+        {className : "h-9 w-9",
+            title : 'github',
+            src : "/assets/github.png",},
+        {className : "h-9 w-8",
+            title : 'leetcode',
+            src : "/assets/LeetCode_logo_white.png",
+            },
+        {className : "h-9 w-9 object-cover rounded-full",
+            title : 'monkeytype',
+            src : "/assets/monkeytype.png",}
+    ]
+
+    const [currentIconIndex, setCurrentIconIndex] = useState(0);
+  
+    const handeIconClick = () => {
+        setCurrentIconIndex((prevIndex) => (prevIndex+1) % icons.length)
+    }
+
+    const currentIcon = icons[currentIconIndex]
     useEffect(() => {
         getAllStudentProfile().then((data) => {
             setStudent_details(data.student_list)
@@ -21,36 +42,26 @@ function Table() {
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
+                            <th></th>
                             <th scope="col" class="px-6 py-3">
                                 Student Name
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Batch
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                <img
-                                    className="h-9 w-9"
-                                    title='github'
-                                    src="\assets\github.png"
-                                    alt="nature image"
-                                />
+                            <th scope="col" class="px-6 py-3 flex justify-center">
+
+                                <div onClick={handeIconClick}>
+                                    <img
+                                        className={currentIcon.className}
+                                        title={currentIcon.title}
+                                        src={currentIcon.src}
+                                        alt={`${currentIcon.title} icon`}
+                                    />
+                                </div>
+                                
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                <img
-                                    className="h-9 w-8"
-                                    title='leetcode'
-                                    src="\assets\LeetCode_logo_white.png"
-                                    alt="nature image"
-                                />
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                <img
-                                    className="h-9 w-9 object-cover rounded-full"
-                                    title='monkeytype'
-                                    src="\assets\monkeytype.png"
-                                    alt="nature image"
-                                />
-                            </th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -58,18 +69,16 @@ function Table() {
                             student_details.map((student, index) => {
                                 return (
                                     <tr class="bg-white odd:bg-gray-800 border-b even:bg-gray-700 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 relative font-medium capitalize text-gray-900 whitespace-nowrap dark:text-white">
-                                            {student.firstName + " " + student.lastName}
+                                        <td class="px-2 relative font-medium  text-gray-900 whitespace-nowrap dark:text-zinc-100">{index+1}.</td>
+                                        <td scope="row" class=" py-4 relative font-medium capitalize text-gray-900 whitespace-nowrap dark:text-zinc-50">
+                                         {student.firstName + " " + student.lastName}
 
-                                        </th>
+                                        </td>
                                         <td class="px-6 py-4">
                                             {student.batch}
                                         </td>
                                         <td class="px-6 py-4">
-                                            <GraphCalender isShow={true}></GraphCalender>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            $2999
+                                            <Data_Section icon={currentIcon.title} data={student}/>
                                         </td>
                                     </tr>
                                 )
