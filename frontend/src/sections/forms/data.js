@@ -2,14 +2,14 @@ import * as Yup from 'yup'
 
 let userRegForm_Data = {
     INITIAL_VALUES: {
-        firstName:'hhh',
-        lastName: 'ghghdf',
-        email: 'mrnmthw19@gmail.com',
-        phoneNumber: 'ghghgfh',
-        batch: 'ferer',
-        githubUsername:'Merin-Philamin-Mathew',
-        leetcodeUsername: 'MerinMathew19',
-        monkeytypingUsername: 'merinmathew19',
+        firstName:'',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        batch: '',
+        githubUsername:'',
+        leetcodeUsername: '',
+        monkeytypingUsername: '',
         githubDetails: {
           push: '',
           pull: '',
@@ -18,12 +18,13 @@ let userRegForm_Data = {
         },
         leetcodeDetails: {
           problems : {
-            hard: '',
-            medium: '',
-            easy: '',
+            solvedProblem: '',
+            hardSolved: '',
+            mediumSolved: '',
+            easySolved: '',
           },
           badges : '',
-          active_days: []
+          active_days: ''
         },
         monkeytypeDetails: {
           consistency: '',

@@ -7,6 +7,7 @@ import { accountValidator } from '../../apis/firebase/account_validator';
 import { GIT_URL_INSTANCE, LEETCODE_URL_INSTANCE, MONKEYTYPE_URL_INSTANCE } from '../../apis/axios_instance';
 import const_data from '../../config/constant';
 import URLS from '../../apis/urls';
+import { leetcodeDetails } from '../../apis/firebase/leetcode_details';
 
 
 
@@ -24,7 +25,6 @@ function UserRegisterForm() {
   return (
     <div>
         <Formik
-        
             initialValues={userRegForm_Data.INITIAL_VALUES}
             validationSchema={userRegForm_Data.VALIDATION_SCHEMA}
             onSubmit={async (val)=>{
@@ -51,46 +51,49 @@ function UserRegisterForm() {
                         console.log("git",git_details);
                         console.log("leet",leetCode_details.data.submissionCalendar);
                         console.log("mt",monkeyType_details.data.data.personalBests.time);
-                        
 
+                        // github
+                        let userStatus = {
+                            push: 0,
+                            pull: 0,
+                            commits: 0
+                        }
+                        git_details.data.forEach((each) => {
+                            if (each.type == "PushEvent") {
+                                userStatus.push += each.payload.size
+                                userStatus.commits += each.payload.commits.length
+                            } else if (each.type == "PullRequestEvent") {
+                                userStatus.pull++
+                            }
+                        })
+                        val.githubDetails.pull = userStatus.pull
+                        val.githubDetails.push = userStatus.push
+                        val.githubDetails.commits = userStatus.commits
 
-                        function monkeyTypePerformance(data) {
-                            const times = Object.values(data.personalBests.time);
-                            
-                            let totalAcc = 0, totalConsistency = 0, totalWpm = 0, totalCount = 0;
-                            
-                            times.forEach(timeArray => {
-                              timeArray.forEach(entry => {
-                                totalAcc += entry.acc;
-                                totalConsistency += entry.consistency;
-                                totalWpm += entry.wpm;
-                                totalCount += 1;
-                              });
+                        // leetcode
+                        await leetcodeDetails(val, leetCode_details)
+
+                        // monkeytype
+                        const times = Object.values(monkeyType_details.data.data.personalBests.time);
+                        let totalAcc = 0, totalConsistency = 0, totalWpm = 0, totalCount = 0;
+                        times.forEach(timeArray => {
+                            timeArray.forEach(entry => {
+                            totalAcc += entry.acc;
+                            totalConsistency += entry.consistency;
+                            totalWpm += entry.wpm;
+                            totalCount += 1;
                             });
-                          
-                            const avgAcc = totalAcc / totalCount;
-                            const avgConsistency = totalConsistency / totalCount;
-                            const avgWpm = totalWpm / totalCount;
-                          
-                            return {
-                              avgAcc,
-                              avgConsistency,
-                              avgWpm
-                            };
-                          }
-                          const averages = monkeyTypePerformance(monkeyType_details.data.data);
-                         
-                          val.monkeytypeDetails.accuracy = averages.avgAcc
-                          val.monkeytypeDetails.consistency = averages.avgConsistency
-                          val.monkeytypeDetails.typing_speed = averages.avgWpm
-
-
-                        await addStudent(val)
-
-                        alert("Form has been submitted")
-
+                        });
+                        
+                        val.monkeytypeDetails.accuracy = totalAcc / totalCount;
+                        val.monkeytypeDetails.consistency = totalConsistency / totalCount;
+                        val.monkeytypeDetails.typing_speed = totalWpm / totalCount;         
                     }
-                }
+                         
+                        await addStudent(val)
+                        alert("Form has been submitted")
+                    }
+                
                 catch(e){
                     console.log("Error:",e)
                 }
