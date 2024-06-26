@@ -9,7 +9,9 @@ const URLS = {
     },
     LEETCODE : {
         profile: (leetcodeUsername)=> `/${leetcodeUsername}`,
-        calender: (leetcodeUsername) => `/${leetcodeUsername}/calendar`
+        calender: (leetcodeUsername) => `/${leetcodeUsername}/calendar`,
+        solved: (leetcodeUsername) => `/${leetcodeUsername}/solved`,
+        badges: (leetcodeUsername) => `/${leetcodeUsername}/badges`,
     }
 }
 
