@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { getAllStudentProfile } from '../../apis/firebase/student_details'
+import GraphCalender from '../utils/GraphCalender'
 
 function Table() {
- 
+
     const [student_details, setStudent_details] = useState([])
 
-    useEffect(()=>{
-        getAllStudentProfile().then((data)=>{
+    useEffect(() => {
+        getAllStudentProfile().then((data) => {
             setStudent_details(data.student_list)
-    
-        }).catch((e)=>{
-            console.log(e.status,e.msg)
+
+        }).catch((e) => {
+            console.log(e.status, e.msg)
         })
-    },[])
- 
+    }, [])
+
     return (
         <>
             <div class="relative overflow-x-auto">
@@ -27,44 +28,45 @@ function Table() {
                                 Batch
                             </th>
                             <th scope="col" class="px-6 py-3">
-                            <img
-                            className="h-9 w-9"
-                            title='github'
-                            src="\assets\github.png"
-                            alt="nature image"
-                            />
+                                <img
+                                    className="h-9 w-9"
+                                    title='github'
+                                    src="\assets\github.png"
+                                    alt="nature image"
+                                />
                             </th>
                             <th scope="col" class="px-6 py-3">
-                            <img
-                            className="h-9 w-8"
-                            title='leetcode'
-                            src="\assets\LeetCode_logo_white.png"
-                            alt="nature image"
-                            />
+                                <img
+                                    className="h-9 w-8"
+                                    title='leetcode'
+                                    src="\assets\LeetCode_logo_white.png"
+                                    alt="nature image"
+                                />
                             </th>
                             <th scope="col" class="px-6 py-3">
-                            <img
-                            className="h-9 w-9 object-cover rounded-full"
-                            title='monkeytype'
-                            src="\assets\monkeytype.png"
-                            alt="nature image"
-                            />
+                                <img
+                                    className="h-9 w-9 object-cover rounded-full"
+                                    title='monkeytype'
+                                    src="\assets\monkeytype.png"
+                                    alt="nature image"
+                                />
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        { 
-                            student_details.map((student) => {
+                        {
+                            student_details.map((student, index) => {
                                 return (
                                     <tr class="bg-white odd:bg-gray-800 border-b even:bg-gray-700 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium capitalize text-gray-900 whitespace-nowrap dark:text-white">
-                                            {student.firstName + " " + student.lastName} 
+                                        <th scope="row" class="px-6 py-4 relative font-medium capitalize text-gray-900 whitespace-nowrap dark:text-white">
+                                            {student.firstName + " " + student.lastName}
+
                                         </th>
                                         <td class="px-6 py-4">
                                             {student.batch}
                                         </td>
                                         <td class="px-6 py-4">
-                                          
+                                            <GraphCalender isShow={true}></GraphCalender>
                                         </td>
                                         <td class="px-6 py-4">
                                             $2999
