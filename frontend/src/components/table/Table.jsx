@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getAllStudentProfile } from '../../apis/firebase/student_details'
 
 function Table() {
+ 
+    const [student_details, setStudent_details] = useState([])
 
-
-    let fill = new Array(10).fill({})
-
+    useEffect(()=>{
+        getAllStudentProfile().then((data)=>{
+            setStudent_details(data.student_list)
+    
+        }).catch((e)=>{
+            console.log(e.status,e.msg)
+        })
+    },[])
+ 
     return (
         <>
             <div class="relative overflow-x-auto">
@@ -12,32 +21,50 @@ function Table() {
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Product name
+                                Student Name
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Color
+                                Batch
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Category
+                            <img
+                            className="h-9 w-9"
+                            title='github'
+                            src="\assets\github.png"
+                            alt="nature image"
+                            />
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Price
+                            <img
+                            className="h-9 w-8"
+                            title='leetcode'
+                            src="\assets\LeetCode_logo_white.png"
+                            alt="nature image"
+                            />
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                            <img
+                            className="h-9 w-9 object-cover rounded-full"
+                            title='monkeytype'
+                            src="\assets\monkeytype.png"
+                            alt="nature image"
+                            />
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            fill.map((each) => {
+                        { 
+                            student_details.map((student) => {
                                 return (
                                     <tr class="bg-white odd:bg-gray-800 border-b even:bg-gray-700 dark:border-gray-700">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            Apple MacBook Pro 17"
+                                        <th scope="row" class="px-6 py-4 font-medium capitalize text-gray-900 whitespace-nowrap dark:text-white">
+                                            {student.firstName + " " + student.lastName} 
                                         </th>
                                         <td class="px-6 py-4">
-                                            Silver
+                                            {student.batch}
                                         </td>
                                         <td class="px-6 py-4">
-                                            Laptop
+                                          
                                         </td>
                                         <td class="px-6 py-4">
                                             $2999
