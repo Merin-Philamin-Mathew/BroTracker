@@ -1,9 +1,9 @@
 import React from 'react'
 
-function GraphCalender({ isShow }) {
+function GraphCalender({ isShow, active_days }) {
 
     let data = new Array(30).fill(1)
-
+    console.log(active_days,"active_days")
     return (
         <div className={`bg-gray-900 shadow-lg mt-2 rounded-md max-w-60 p-2    z-20 top-15 ${!isShow && "hidden"}`}>
             <div className='flex gap-2'>
@@ -25,4 +25,4 @@ function GraphCalender({ isShow }) {
     )
 }
 
-export default GraphCalender
+export default React.memo(GraphCalender)
