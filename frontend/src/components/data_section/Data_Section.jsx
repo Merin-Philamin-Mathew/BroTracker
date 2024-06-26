@@ -5,14 +5,15 @@ import LeetCodeSection from './LeetCodeSection';
 import MonkeyTypeSection from './MonkeyTypeSection';
 
 function Data_Section({icon,data}) {
-    console.log(data)
+    
    
   return (
     <div className='flex'>
+         
       {/* <GraphCalender isShow={icon == 'leetcode'} active_days={ data.leetcodeDetails.active_days}/> */}
-        {icon === 'leetcode' && <LeetCodeSection data={data.leecodeDetails}/>}
-        {icon === 'github' && <GitHubSection data={data.githubDetails}/>}
-        {icon === 'monkeytype' && <MonkeyTypeSection data={data.monkeytypeDetails}/>}
+        {icon == 'leetcode' && <LeetCodeSection data={data.leetcodeDetails}/>}
+        {icon == 'github' && <GitHubSection data={data.githubDetails}/>}
+        {icon == 'monkeytype' && <MonkeyTypeSection data={data.monkeytypeDetails}/>}
     </div>
   )
 }
