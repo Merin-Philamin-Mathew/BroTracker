@@ -1,11 +1,16 @@
 import React from 'react'
 import UserRegisterForm from '../../sections/forms/UserRegisterForm'
+import { useNavigate } from 'react-router-dom'
 
 function AddStudent() {
+  const navigate = useNavigate()
+  const return_dashboard = ()=>{
+    navigate('/admin')
+  }
   return (
     <div class="flex min-h-full flex-col justify-center  py-12 ">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-10 w-auto" src="\assets\mag_lens.png" alt="Your Company"/>
+            <img class="mx-auto h-10 w-auto" onClick={return_dashboard} src="\assets\mag_lens.png" alt="Your Company"/>
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-slate-300">Add Student Information</h2>
         </div>
        
