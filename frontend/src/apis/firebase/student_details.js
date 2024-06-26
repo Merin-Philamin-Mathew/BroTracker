@@ -25,7 +25,6 @@ function getAllStudentProfile() {
         getDocs(collection(db, const_data.FB_STUDENT_COLLECTION_NAME)).then((querySnapShot) => {
             let student_data = querySnapShot.docs
             let all_students = student_data.map((each) => each.data());
-            let statusCode = q
             resolve({ status: true, student_list: all_students })
         }).catch((err) => {
             console.log(err);
