@@ -78,7 +78,6 @@ function UserRegisterForm() {
                               avgWpm
                             };
                           }
-                          
                           const averages = monkeyTypePerformance(monkeyType_details.data.data);
                          
                           val.monkeytypeDetails.accuracy = averages.avgAcc
