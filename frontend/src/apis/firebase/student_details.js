@@ -48,32 +48,32 @@ function getSingleStudentProfile(student_id, successCallback, errorCallback) {
     })
 }
 
-async function getProfileStatus(username = "Merin-Philamin-Mathew") {
+// async function getProfileStatus(username = "Merin-Philamin-Mathew") {
 
-    let userStatus = {
-        push: 0,
-        pull: 0,
-        commits: 0
-    }
-    try {
+//     let userStatus = {
+//         push: 0,
+//         pull: 0,
+//         commits: 0
+//     }
+//     try {
 
-        let apiCall = await fetch(`https://api.github.com/users/${username}/events`);
-        let data = await apiCall.json()
+//         let apiCall = await fetch(`https://api.github.com/users/${username}/events`);
+//         let data = await apiCall.json()
 
-        data.forEach((each) => {
-            if (each.type == "PushEvent") {
-                userStatus.push += each.payload.size
-                userStatus.commits += each.payload.commits.length
-            } else if (each.type == "PullRequestEvent") {
-                userStatus.pull++
-            }
-        })
+//         data.forEach((each) => {
+//             if (each.type == "PushEvent") {
+//                 userStatus.push += each.payload.size
+//                 userStatus.commits += each.payload.commits.length
+//             } else if (each.type == "PullRequestEvent") {
+//                 userStatus.pull++
+//             }
+//         })
 
-        return userStatus;
+//         return userStatus;
 
-    } catch (e) {
-        return null;
-    }
-}
+//     } catch (e) {
+//         return null;
+//     }
+// }
 
-export { addStudent, getAllStudentProfile, getSingleStudentProfile, getProfileStatus }
+export { addStudent, getAllStudentProfile, getSingleStudentProfile }
