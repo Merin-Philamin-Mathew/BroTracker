@@ -14,7 +14,8 @@ let userRegForm_Data = {
           push: '',
           pull: '',
           commits: '',
-          active_days: []
+          active_days: [],
+          repos: ''
         },
         leetcodeDetails: {
           problems : {
@@ -42,8 +43,8 @@ let userRegForm_Data = {
           .required('Required'),
         email: Yup.string().email('Invalid email address')
           .required('Required'),
-        // phoneNumber: Yup.number()
-        // .test('length', 'Must be 10 characters',(val)=>val && val.toString().length == 10),
+        phoneNumber: Yup.number()
+        .test('length', 'Must be 10 characters',(val)=>val && val.toString().length == 10),
         githubUsername: Yup.string()
             .max(30, 'Must be 20 characters or less')
             .required('Required'),
