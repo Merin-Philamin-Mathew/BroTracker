@@ -10,6 +10,7 @@ import URLS from '../../apis/urls';
 import { leetcodeDetails } from '../../apis/firebase/leetcode_details';
 import { BatchContext } from '../../components/context/BatchContext';
 import SpinnerLoading from '../../components/utils/SpinnerLoading';
+import { toast } from 'react-toastify';
 
 
 function UserRegisterForm() {
@@ -26,7 +27,7 @@ function UserRegisterForm() {
             <Formik
                 initialValues={userRegForm_Data.INITIAL_VALUES}
                 validationSchema={userRegForm_Data.VALIDATION_SCHEMA}
-                onSubmit={async (val) => {
+                onSubmit={async (val, { resetForm }) => {
                     setSpinner({ isShow: true, msg: "Please wait" })
                     try {
 
@@ -42,16 +43,16 @@ function UserRegisterForm() {
                         console.log(uniqueValidation);
 
                         if (!uniqueValidation?.status) {
-                            alert(uniqueValidation.msg)
+                            toast.error(uniqueValidation.msg)
                         }
 
                         if (!git_details.status) {
-                            alert("no git user")
+                            toast.error("no git user")
                         }
                         else if (leetCode_details?.data?.errors) {
-                            alert("no leet user")
+                            toast.error("no leet user")
                         } else if (!monkeyType_details.status) {
-                            alert("no mt user")
+                            toast.error("no mt user")
                         }
                         else {
 
@@ -97,7 +98,8 @@ function UserRegisterForm() {
                             val.monkeytypeDetails.typing_speed = totalWpm / totalCount;
 
                             await addStudent(val)
-                            alert("Form has been submitted")
+                            toast.success("Form has been submitted")
+                            resetForm();
                         };
 
                     } catch (e) {
