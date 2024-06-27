@@ -58,7 +58,7 @@ function UserRegisterForm() {
 
                             console.log(val)
                             console.log("git", git_details);
-                            console.log("leet", leetCode_details.data.submissionCalendar);
+                            // console.log("leet", leetCode_details.data.submissionCalendar);
                             console.log("mt", monkeyType_details.data.data.personalBests.time);
 
                             // github
