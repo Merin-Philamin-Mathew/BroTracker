@@ -1,13 +1,24 @@
-import { getProfileStatus } from "./apis/firebase/student_details";
+import { useContext, useEffect } from "react";
 import CustomeModal from "./components/utils/CustomeModal";
 import const_data from "./config/constant";
 // import Dashboard from "./pages/admin/Dashboard";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { BatchContext } from "./components/context/BatchContext";
+import { getBatch } from "./apis/firebase/batch_details";
 
 function App() {
-
   let routerProvider = createBrowserRouter(const_data.REACT_ROUTER_PATH)
+  const batch = useContext(BatchContext)
+  useEffect(async ()=>{
+    try{
+        let batchesArray = await getBatch()
+          batch.setBatch(batchesArray)
+    }catch(e){
+        console.log("Batches unavailable: ", e)
+    }
+},[])
   return (
+    
     <div className="bg-gray-800">
       <CustomeModal isOpen={false} title={"Add new batch"}>
         <div class="mb-5">
