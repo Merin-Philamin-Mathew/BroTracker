@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { addStudent } from '../../apis/firebase/student_details';
 import { getBatch } from '../../apis/firebase/batch_details';
@@ -8,21 +8,13 @@ import { GIT_URL_INSTANCE, LEETCODE_URL_INSTANCE, MONKEYTYPE_URL_INSTANCE } from
 import const_data from '../../config/constant';
 import URLS from '../../apis/urls';
 import { leetcodeDetails } from '../../apis/firebase/leetcode_details';
+import { BatchContext } from '../../components/context/BatchContext';
 
 
 
 
-function UserRegisterForm() {
-    const [batches, setBatches] = useState([])
-    
-    useEffect(async ()=>{
-        try{
-            let batchesArray = await getBatch()
-            setBatches(batchesArray)
-        }catch(e){
-            console.log("Batches unavailable: ", e)
-        }
-    },[])
+function  UserRegisterForm() {
+    const batches = useContext(BatchContext)
   return (
     <div>
         <Formik
@@ -89,11 +81,12 @@ function UserRegisterForm() {
                         val.monkeytypeDetails.accuracy = totalAcc / totalCount;
                         val.monkeytypeDetails.consistency = totalConsistency / totalCount;
                         val.monkeytypeDetails.typing_speed = totalWpm / totalCount;         
-                    }
-                         
+                        
                         await addStudent(val)
                         alert("Form has been submitted")
                     }
+                         
+                }
                 
                 catch(e){
                     console.log("Error:",e)
@@ -172,7 +165,7 @@ function UserRegisterForm() {
                     <div className="mt-2">
                         <Field  as="select" id="batch" name="batch"  autoComplete="batch-name" className="block w-full rounded-md border-0 py-1.5 text-gray-700 px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-orange-200 sm:max-w-xs sm:text-sm sm:leading-6">
                         <option className='text-base font-medium leading-6'>Select Batch</option>
-                        {batches.map((batch,index)=>(
+                        {batches.batch.map((batch,index)=>(
                           <option key={index}  name='batch' id='batch' className='text-base  font-medium leading-6'>{batch}</option>
                         ))}
                         </Field>
