@@ -47,12 +47,12 @@ function UserRegisterForm() {
                         }
 
                         if (!git_details.status) {
-                            toast.error("no git user")
+                            toast.error("Please provide valid GitHub username")
                         }
                         else if (leetCode_details?.data?.errors) {
-                            toast.error("no leet user")
+                            toast.error("Please provide valid LeetCode username")
                         } else if (!monkeyType_details.status) {
-                            toast.error("no mt user")
+                            toast.error("Please provide valid Monkeytype username")
                         }
                         else {
 
