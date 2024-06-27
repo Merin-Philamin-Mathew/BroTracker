@@ -47,12 +47,12 @@ function UserRegisterForm() {
                         }
 
                         if (!git_details.status) {
-                            toast.error("no git user")
+                            toast.error("Please provide valid GitHub username")
                         }
                         else if (leetCode_details?.data?.errors) {
-                            toast.error("no leet user")
+                            toast.error("Please provide valid LeetCode username")
                         } else if (!monkeyType_details.status) {
-                            toast.error("no mt user")
+                            toast.error("Please provide valid Monkeytype username")
                         }
                         else {
 
@@ -78,6 +78,9 @@ function UserRegisterForm() {
                             val.githubDetails.pull = userStatus.pull
                             val.githubDetails.push = userStatus.push
                             val.githubDetails.commits = userStatus.commits
+
+                            const git_Repos = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.repos(val.githubUsername)) 
+                            val.githubDetails.repos = git_Repos.data?.length
 
                             // leetcode
                             await leetcodeDetails(val, leetCode_details)
