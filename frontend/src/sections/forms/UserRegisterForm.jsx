@@ -9,42 +9,50 @@ import const_data from '../../config/constant';
 import URLS from '../../apis/urls';
 import { leetcodeDetails } from '../../apis/firebase/leetcode_details';
 import { BatchContext } from '../../components/context/BatchContext';
+import SpinnerLoading from '../../components/utils/SpinnerLoading';
+import { toast } from 'react-toastify';
 
 
 function UserRegisterForm() {
 
     const batches = useContext(BatchContext)
+    let [spinnerData, setSpinner] = useState({
+        isShow: false,
+        msg: "Please wait...."
+    })
 
     return (
         <div>
+            <SpinnerLoading isShow={spinnerData?.isShow ?? false} title={spinnerData?.msg} />
             <Formik
                 initialValues={userRegForm_Data.INITIAL_VALUES}
                 validationSchema={userRegForm_Data.VALIDATION_SCHEMA}
-                onSubmit={async (val) => {
+                onSubmit={async (val, { resetForm }) => {
+                    setSpinner({ isShow: true, msg: "Please wait" })
                     try {
 
+                        setSpinner({ isShow: true, msg: "Fetching github details" })
                         const git_details = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.events(val.githubUsername))
+                        setSpinner({ isShow: true, msg: "Fetching leetcode details" })
                         const leetCode_details = await accountValidator(LEETCODE_URL_INSTANCE, URLS.LEETCODE.calender(val.leetcodeUsername))
+                        setSpinner({ isShow: true, msg: "Fetching monkeytype details" })
                         const monkeyType_details = await accountValidator(MONKEYTYPE_URL_INSTANCE, URLS.MONKEYTYPE.profile(val.monkeytypingUsername))
 
+                        setSpinner({ isShow: true, msg: "Fetching validation details" })
                         const uniqueValidation = await credUniqueValidator(val.phoneNumber, val.email)
                         console.log(uniqueValidation);
 
                         if (!uniqueValidation?.status) {
-                            alert(uniqueValidation.msg)
-                            return;
+                            toast.error(uniqueValidation.msg)
                         }
 
                         if (!git_details.status) {
-                            alert("no git user")
-                            return;
+                            toast.error("no git user")
                         }
                         else if (leetCode_details?.data?.errors) {
-                            alert("no leet user")
-                            return;
+                            toast.error("no leet user")
                         } else if (!monkeyType_details.status) {
-                            alert("no mt user")
-                            return;
+                            toast.error("no mt user")
                         }
                         else {
 
@@ -90,12 +98,14 @@ function UserRegisterForm() {
                             val.monkeytypeDetails.typing_speed = totalWpm / totalCount;
 
                             await addStudent(val)
-                            alert("Form has been submitted")
+                            toast.success("Form has been submitted")
+                            resetForm();
                         };
 
                     } catch (e) {
                         console.log("Error:", e)
                     }
+                    setSpinner({ isShow: false })
                 }}
             >
                 <Form >
