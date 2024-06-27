@@ -59,9 +59,14 @@ function  UserRegisterForm() {
                                 userStatus.pull++
                             }
                         })
+
                         val.githubDetails.pull = userStatus.pull
                         val.githubDetails.push = userStatus.push
                         val.githubDetails.commits = userStatus.commits
+                        // repos
+                        const git_Repos = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.repos(val.githubUsername)) 
+                    
+                        val.githubDetails.repos = git_Repos.data?.length
 
                         // leetcode
                         await leetcodeDetails(val, leetCode_details)
@@ -82,7 +87,7 @@ function  UserRegisterForm() {
                         val.monkeytypeDetails.consistency = totalConsistency / totalCount;
                         val.monkeytypeDetails.typing_speed = totalWpm / totalCount;         
                         
-                        await addStudent(val)
+                        // await addStudent(val)
                         alert("Form has been submitted")
                     }
                          

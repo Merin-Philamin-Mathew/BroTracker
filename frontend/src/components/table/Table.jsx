@@ -42,11 +42,11 @@ function Table() {
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th></th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="py-3"></th>
+                            <th scope="col" class="px-4 py-3">
                                 Student Name
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 ">
                                 Batch
                             </th>
                             <th scope="col" class="px-6 py-3 flex justify-center">
@@ -69,12 +69,12 @@ function Table() {
                             student_details.map((student, index) => {
                                 return (
                                     <tr class="bg-white odd:bg-gray-800 border-b even:bg-gray-700 dark:border-gray-700">
-                                        <td class="px-2 relative font-medium  text-gray-900 whitespace-nowrap dark:text-zinc-100">{index+1}.</td>
-                                        <td scope="row" class=" py-4 relative font-medium capitalize text-gray-900 whitespace-nowrap dark:text-zinc-50">
+                                        <td class="pl-5 relative font-medium text-gray-900 whitespace-nowrap dark:text-zinc-100">{index+1}.</td>
+                                        <td scope="row" class="px-4 py-4 relative font-medium capitalize text-gray-900 whitespace-nowrap dark:text-zinc-50">
                                          {student.firstName + " " + student.lastName}
 
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 ">
                                             {student.batch}
                                         </td>
                                         <td class="px-6 py-4">
