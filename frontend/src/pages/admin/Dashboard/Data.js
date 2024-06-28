@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 let addBatchInitialValue = {
-    batch: null
+    batch: ''
 }
 
 let addBatchValidation = yup.object().shape({
