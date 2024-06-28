@@ -79,6 +79,9 @@ function UserRegisterForm() {
                             val.githubDetails.push = userStatus.push
                             val.githubDetails.commits = userStatus.commits
 
+                            const git_Repos = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.repos(val.githubUsername)) 
+                            val.githubDetails.repos = git_Repos.data?.length
+
                             // leetcode
                             await leetcodeDetails(val, leetCode_details)
 

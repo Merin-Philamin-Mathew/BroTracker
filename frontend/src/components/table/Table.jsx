@@ -39,7 +39,7 @@ function Table({ headers, data }) {
 
                                                 return (each ? <td className={`px-6 py-4 ${student[each]?.classList}`}>
                                                     {data[index][each].data}
-                                                </td> : <td className={student[each]?.classList}>{index + 1}</td>)
+                                                </td> : <td className={student[each].classList}>{index + 1}</td>)
                                             })
                                         }
                                     </tr>
