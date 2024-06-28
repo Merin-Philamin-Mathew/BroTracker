@@ -22,7 +22,7 @@ function Dashboard() {
   }
 
   function onError(err) {
-    toast.error("Batch creation failed")
+    toast.error(err)
     setSpinnerOpen(false)
   }
 
