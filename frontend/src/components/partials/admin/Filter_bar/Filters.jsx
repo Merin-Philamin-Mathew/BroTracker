@@ -5,7 +5,7 @@ import const_data from '../../../../config/constant'
 import AddButton from '../../../utils/Buttons/AddButton'
 import { useNavigate } from 'react-router-dom'
 
-function Filters({ onAddBatchClick }) {
+function Filters({ onAddBatchClick, onSearch }) {
 
   let batchProps = const_data.BROTO_BATCH.map((each) => ({ title: each }))
   let hubProps = const_data.BROTO_HUB.map((each) => ({ title: each }))
@@ -24,7 +24,7 @@ function Filters({ onAddBatchClick }) {
           <Dropdown title={"Hub"} onClick={() => { }} items={perfomanceProps} />
         </div>
         <div className='sm:mt-0 mt-2'>
-          <SearchBar />
+          <SearchBar onSearch={onSearch} />
         </div>
       </div>
       <div className='w-full lg:w-2/5'>

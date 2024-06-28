@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
   return (
     <div >
       <div class="relative flex items-center w-full h-10 rounded-lg  shadow-lg bg-gray-700 overflow-hidden">
@@ -11,6 +11,7 @@ function SearchBar() {
         </div>
 
         <input
+          onChange={onSearch}
           class="peer bg-gray-700 h-full w-full outline-none text-sm text-white pr-2"
           type="text"
           id="search"

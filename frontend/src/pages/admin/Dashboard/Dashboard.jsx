@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../../components/partials/admin/Header/Header'
 import Footer from '../../../components/partials/admin/Footer/Footer'
 import Table from '../../../components/table/Table'
@@ -10,11 +10,69 @@ import { addBatchInitialValue, addBatchValidation } from './Data'
 import { toast } from 'react-toastify'
 import { addBatchHandler } from './Logic'
 import SpinnerLoading from '../../../components/utils/SpinnerLoading'
+import { getAllStudentProfile } from '../../../apis/firebase/student_details'
+import Data_Section from '../../../components/data_section/Data_Section'
 
 function Dashboard() {
 
+  const icons = [
+    {
+      className: "h-9 w-9",
+      title: 'github',
+      src: "/assets/github.png",
+    },
+    {
+      className: "h-9 w-8",
+      title: 'leetcode',
+      src: "/assets/LeetCode_logo_white.png",
+    },
+    {
+      className: "h-9 w-9 object-cover rounded-full",
+      title: 'monkeytype',
+      src: "/assets/monkeytype.png",
+    }
+  ]
+
+
   let [isBatchModelOpen, setBatchModelOpen] = useState(false)
   let [isSpinnerOpen, setSpinnerOpen] = useState(false)
+  const [currentIconIndex, setCurrentIconIndex] = useState(0);
+  const [currentIcon, setCurrentIcon] = useState(icons[currentIconIndex])
+  const [student_details, setStudent_details] = useState([])
+
+
+  useEffect(() => {
+    getAllStudentProfile().then((data) => {
+      console.log(data);
+
+      const transformData = data.student_list.map(student => ({
+        "": {
+          classList: 'p-5'
+        },
+        name: {
+          type: "string",
+          data: student.firstName + student.lastName,
+          classList: 'relative font-medium capitalize text-gray-900 whitespace-nowrap dark:text-zinc-50'
+        },
+        batch: {
+          type: "string",
+          data: student.batch
+        },
+        data: {
+          type: "element",
+          data: <Data_Section icon={currentIcon.title} data={student} />
+        }
+      }));
+
+      console.log("The data");
+      console.log(transformData);
+
+      setStudent_details(transformData)
+
+    }).catch((e) => {
+      console.log(e.status, e.msg)
+    })
+  }, [])
 
   function addBatchSuccess() {
     toast.success("Batch added success")
@@ -24,6 +82,47 @@ function Dashboard() {
   function onError(err) {
     toast.error(err)
     setSpinnerOpen(false)
+  }
+
+
+
+  const handeIconClick = () => {
+    // setCurrentIcon(icons[currentIcon + 1] % icons.length)
+    setCurrentIconIndex((prevIndex) => (prevIndex + 1) % icons.length)
+  }
+
+
+
+
+
+  let studentTableHeaders = [
+    {
+      title: "",
+      class: []
+    },
+    {
+      title: "Student name",
+      class: []
+    },
+    {
+      title: "Batch",
+      class: []
+    },
+    {
+      title: <div onClick={handeIconClick}>
+        <img
+          className={currentIcon.className}
+          title={currentIcon.title}
+          src={currentIcon.src}
+          alt={`${currentIcon.title} icon`}
+        />
+      </div>,
+      class: ['flex', 'justify-center']
+    },
+  ]
+
+  function onSearchTable() {
+
   }
 
   return (
@@ -59,9 +158,9 @@ function Dashboard() {
         </div>
         <div className='mt-5 mb-5'>
           <div className='mb-3'>
-            <Filters onAddBatchClick={() => setBatchModelOpen(true)} />
+            <Filters onSearch={onSearchTable} onAddBatchClick={() => setBatchModelOpen(true)} />
           </div>
-          <Table />
+          <Table data={student_details} headers={studentTableHeaders} />
         </div>
       </Container>
       <div className='mt-10'>

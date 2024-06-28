@@ -3,38 +3,15 @@ import { getAllStudentProfile } from '../../apis/firebase/student_details'
 import GraphCalender from '../utils/GraphCalender'
 import Data_Section from '../data_section/Data_Section'
 
-function Table() {
+function Table({ headers, data }) {
+    console.log(data);
 
-    const [student_details, setStudent_details] = useState([])
 
-    const icons = [
-        {className : "h-9 w-9",
-            title : 'github',
-            src : "/assets/github.png",},
-        {className : "h-9 w-8",
-            title : 'leetcode',
-            src : "/assets/LeetCode_logo_white.png",
-            },
-        {className : "h-9 w-9 object-cover rounded-full",
-            title : 'monkeytype',
-            src : "/assets/monkeytype.png",}
-    ]
 
-    const [currentIconIndex, setCurrentIconIndex] = useState(0);
-  
-    const handeIconClick = () => {
-        setCurrentIconIndex((prevIndex) => (prevIndex+1) % icons.length)
-    }
 
-    const currentIcon = icons[currentIconIndex]
-    useEffect(() => {
-        getAllStudentProfile().then((data) => {
-            setStudent_details(data.student_list)
 
-        }).catch((e) => {
-            console.log(e.status, e.msg)
-        })
-    }, [])
+
+
 
     return (
         <>
@@ -42,44 +19,29 @@ function Table() {
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th></th>
-                            <th scope="col" class="px-6 py-3">
-                                Student Name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Batch
-                            </th>
-                            <th scope="col" class="px-6 py-3 flex justify-center">
-
-                                <div onClick={handeIconClick}>
-                                    <img
-                                        className={currentIcon.className}
-                                        title={currentIcon.title}
-                                        src={currentIcon.src}
-                                        alt={`${currentIcon.title} icon`}
-                                    />
-                                </div>
-                                
-                            </th>
-                            
+                            {
+                                headers.map((item) => {
+                                    return (
+                                        <th scope="col" class={`px-6 py-3 ${item?.classList}`}>{item?.title}</th>
+                                    )
+                                })
+                            }
                         </tr>
                     </thead>
                     <tbody>
+
                         {
-                            student_details.map((student, index) => {
+                            data.map((student, index) => {
                                 return (
                                     <tr class="bg-white odd:bg-gray-800 border-b even:bg-gray-700 dark:border-gray-700">
-                                        <td class="px-2 relative font-medium  text-gray-900 whitespace-nowrap dark:text-zinc-100">{index+1}.</td>
-                                        <td scope="row" class=" py-4 relative font-medium capitalize text-gray-900 whitespace-nowrap dark:text-zinc-50">
-                                         {student.firstName + " " + student.lastName}
+                                        {
+                                            Object.keys(student).map(function (each) {
 
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {student.batch}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <Data_Section icon={currentIcon.title} data={student}/>
-                                        </td>
+                                                return (each ? <td className={`px-6 py-4 ${student[each]?.classList}`}>
+                                                    {data[index][each].data}
+                                                </td> : <td className={student[each]?.classList}>{index + 1}</td>)
+                                            })
+                                        }
                                     </tr>
                                 )
                             })
