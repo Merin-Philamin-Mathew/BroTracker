@@ -5,8 +5,9 @@ function LeetCodeSection({data}) {
     console.log("leetcode");
     console.log(data);
   return (
-    <div className='w-full'>
-    <div className="graph w-full flex justify-center">
+    <div >
+        <div className='w-full '>
+      <div className="graph w-full flex justify-center">
       
 
       <div className='bg-gray-900  shadow-lg mt-2 rounded-md max-w-64 p-2     z-20 top-15'>
@@ -27,6 +28,8 @@ function LeetCodeSection({data}) {
 
 
     </div>
+      </div>
+    
   </div>
   )
 }

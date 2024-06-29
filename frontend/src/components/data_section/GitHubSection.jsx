@@ -3,7 +3,8 @@ import GraphCalender from '../utils/GraphCalender'
 
 function GitHubSection({data}) {
   return (
-    <div className='w-full'>
+    <div >
+      <div className='w-full'>
       <div className="graph w-full flex justify-center">
         
 
@@ -23,6 +24,8 @@ function GitHubSection({data}) {
 
 
       </div>
+      </div>
+      
     </div>
   )
 }

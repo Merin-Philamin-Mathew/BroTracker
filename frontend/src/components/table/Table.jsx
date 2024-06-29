@@ -49,8 +49,24 @@ function Table() {
                             <th scope="col" class="px-6 py-3 ">
                                 Batch
                             </th>
-                            <th scope="col" class="px-6 py-3 flex justify-center">
+                            <th scope="col" class="px-6 py-3 flex gap-6 justify-center">
 
+                                <div onClick={handeIconClick}>
+                                    <img
+                                        className={currentIcon.className}
+                                        title={currentIcon.title}
+                                        src={currentIcon.src}
+                                        alt={`${currentIcon.title} icon`}
+                                    />
+                                </div>
+                                <div onClick={handeIconClick}>
+                                    <img
+                                        className={currentIcon.className}
+                                        title={currentIcon.title}
+                                        src={currentIcon.src}
+                                        alt={`${currentIcon.title} icon`}
+                                    />
+                                </div>
                                 <div onClick={handeIconClick}>
                                     <img
                                         className={currentIcon.className}
@@ -78,6 +94,7 @@ function Table() {
                                             {student.batch}
                                         </td>
                                         <td class="px-6 py-4">
+                                    
                                             <Data_Section icon={currentIcon.title} data={student}/>
                                         </td>
                                     </tr>
