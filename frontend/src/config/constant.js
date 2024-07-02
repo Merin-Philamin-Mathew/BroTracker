@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Dashboard from '../pages/admin/Dashboard';
+import Dashboard from '../pages/admin/Dashboard/Dashboard';
 import AddStudent from '../pages/admin/AddStudent';
 import Container from '../components/utils/Container';
 
@@ -13,7 +13,7 @@ let const_data = {
         },
         {
             path: "/admin",
-            element: <Dashboard/>
+            element: <Dashboard />
         },
         {
             path: "/registration-success",
@@ -21,19 +21,19 @@ let const_data = {
         },
         {
             path: "/admin/student",
-            element: <><Container><Outlet/></Container></>,
-            children:[
+            element: <><Container><Outlet /></Container></>,
+            children: [
                 {
-                    path:"/admin/student/add",
-                    element:<AddStudent/>
+                    path: "/admin/student/add",
+                    element: <AddStudent />
                 }
             ]
         }
     ],
-   
+
     BROTO_BATCH: ['BCE118', 'BCE146'],
-    BROTO_HUB: ['Kochi','Calicut']
+    BROTO_HUB: ['Kochi', 'Calicut']
 }
- 
+
 
 export default const_data 
