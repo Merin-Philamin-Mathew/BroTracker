@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { addStudent } from '../../apis/firebase/student_details';
-import { getBatch } from '../../apis/firebase/batch_details';
 import { userRegForm_Data } from './data';
 import { accountValidator, credUniqueValidator } from '../../apis/firebase/account_validator';
 import { GIT_URL_INSTANCE, LEETCODE_URL_INSTANCE, MONKEYTYPE_URL_INSTANCE } from '../../apis/axios_instance';
@@ -171,11 +170,9 @@ function UserRegisterForm() {
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-700 px-3 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-200 sm:text-sm sm:leading-6"
                                         />
                                         <ErrorMessage component={'div'} className='text-red-700' name='phoneNumber'></ErrorMessage >
-
                                     </div>
                                 </div>
-
-
+                                
 
                                 <div className="sm:col-span-3">
                                     <label htmlFor="batch" className="block text-sm  font-medium leading-6 text-slate-400">Batch</label>
@@ -235,8 +232,6 @@ function UserRegisterForm() {
 
                             </div>
                         </div>
-
-
                     </div>
 
                     <div className="mt-6 flex items-center justify-end gap-x-6">
