@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Dropdown from '../../../utils/Dropdown'
 import SearchBar from '../../../utils/SearchBar'
 import const_data from '../../../../config/constant'
 import AddButton from '../../../utils/Buttons/AddButton'
 import { useNavigate } from 'react-router-dom'
+import { BatchContext } from '../../../context/BatchContext'
+
 
 function Filters({ onAddBatchClick }) {
+  const Batches = useContext(BatchContext)
 
-  let batchProps = const_data.BROTO_BATCH.map((each) => ({ title: each }))
-  let hubProps = const_data.BROTO_HUB.map((each) => ({ title: each }))
+  let batchProps = Batches.batch.map((each) => ({ title: each }))
+  let hubProps = []
   let perfomanceProps = [{ title: "Pro" }, { title: "Intermediete" }, { title: "Begginer" }]
 
   const navigate = useNavigate()

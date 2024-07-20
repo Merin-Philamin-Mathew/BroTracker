@@ -38,7 +38,7 @@ function UserRegisterForm() {
                         const monkeyType_details = await accountValidator(MONKEYTYPE_URL_INSTANCE, URLS.MONKEYTYPE.profile(val.monkeytypingUsername))
 
                         setSpinner({ isShow: true, msg: "Fetching validation details" })
-                        const uniqueValidation = await credUniqueValidator(val.phoneNumber, val.email)
+                        const uniqueValidation = await credUniqueValidator(val.phoneNumber, val.email, val.githubUsername, val.leetcodeUsername, val.monkeytypingUsername)
                         console.log(uniqueValidation);
 
                         if (!uniqueValidation?.status) {
@@ -81,7 +81,7 @@ function UserRegisterForm() {
                             const git_Repos = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.repos(val.githubUsername)) 
                             val.githubDetails.repos = git_Repos.data?.length
 
-                            // leetcode
+                            // setting more leetcode details in the database
                             await leetcodeDetails(val, leetCode_details)
 
                             // monkeytype
