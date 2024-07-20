@@ -56,6 +56,17 @@ let userRegForm_Data = {
         monkeytypingUsername: Yup.string()
             .max(20, 'Must be 20 characters or less')
             .required('Required'),
+      }),
+
+      CREDENTIALS:{
+        email:'',
+        password:'',
+      },
+      CREDENTIALS_VALIDATION_SCHEMA: Yup.object().shape({
+        email: Yup.string().email('Invalid email address')
+          .required('Required'),
+          password: Yup.string()
+          .required('Required')
       })
 }
 

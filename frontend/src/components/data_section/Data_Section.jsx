@@ -14,7 +14,6 @@ function Data_Section({icon,data}) {
         {icon == 'leetcode' && <LeetCodeSection data={data.leetcodeDetails}/>}
         {icon == 'github' && <GitHubSection data={data.githubDetails}/>}
         {icon == 'monkeytype' && <MonkeyTypeSection data={data.monkeytypeDetails}/>}
-      <GraphCalender isShow={icon == 'leetcode'} active_days={ data.leetcodeDetails.active_days}/>
     </div>
   )
 }
