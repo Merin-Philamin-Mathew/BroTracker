@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Dropdown from '../../../utils/Dropdown'
 import SearchBar from '../../../utils/SearchBar'
 import const_data from '../../../../config/constant'
 import AddButton from '../../../utils/Buttons/AddButton'
 import { useNavigate } from 'react-router-dom'
+import { BatchContext } from '../../../context/BatchContext'
 
-function Filters() {
 
-  let batchProps = const_data.BROTO_BATCH.map((each) => ({ title: each }))
-  let hubProps = const_data.BROTO_HUB.map((each) => ({ title: each }))
+function Filters({ onAddBatchClick }) {
+  const Batches = useContext(BatchContext)
+
+  let batchProps = Batches.batch.map((each) => ({ title: each }))
+  let hubProps = []
   let perfomanceProps = [{ title: "Pro" }, { title: "Intermediete" }, { title: "Begginer" }]
 
   const navigate = useNavigate()
-  const navigate_addStudent = ()=>{
+  const navigate_addStudent = () => {
     navigate('/admin/student/add')
   }
   return (
@@ -31,7 +34,7 @@ function Filters() {
         <div className='lg:flex justify-end items-center mt-3 lg:mt-0'>
           <div className='sm:flex grid gap-2'>
             <AddButton title={"Add Student"} onClick={navigate_addStudent} />
-            <AddButton title={"Add Batch"} onClick={() => { }} />
+            <AddButton title={"Add Batch"} onClick={() => { onAddBatchClick() }} />
             <AddButton title={"Add Hub"} onClick={() => { }} />
           </div>
         </div>

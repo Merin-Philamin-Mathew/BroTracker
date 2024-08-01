@@ -32,7 +32,7 @@ async function accountValidator(baseURLInstance, url) {
 }
 
 
-export async function credUniqueValidator(phone_number, email_address) {
+export async function credUniqueValidator(phone_number, email_address,githubUsername,leetcodeUsername,monkeytypeUsername) {
 
     try {
         console.log(phone_number, email_address);

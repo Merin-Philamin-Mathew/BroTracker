@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { addStudent } from '../../apis/firebase/student_details';
-import { getBatch } from '../../apis/firebase/batch_details';
 import { userRegForm_Data } from './data';
 import { accountValidator, credUniqueValidator } from '../../apis/firebase/account_validator';
 import { GIT_URL_INSTANCE, LEETCODE_URL_INSTANCE, MONKEYTYPE_URL_INSTANCE } from '../../apis/axios_instance';
@@ -39,7 +38,7 @@ function UserRegisterForm() {
                         const monkeyType_details = await accountValidator(MONKEYTYPE_URL_INSTANCE, URLS.MONKEYTYPE.profile(val.monkeytypingUsername))
 
                         setSpinner({ isShow: true, msg: "Fetching validation details" })
-                        const uniqueValidation = await credUniqueValidator(val.phoneNumber, val.email)
+                        const uniqueValidation = await credUniqueValidator(val.phoneNumber, val.email, val.githubUsername, val.leetcodeUsername, val.monkeytypingUsername)
                         console.log(uniqueValidation);
 
                         if (!uniqueValidation?.status) {
@@ -47,18 +46,18 @@ function UserRegisterForm() {
                         }
 
                         if (!git_details.status) {
-                            toast.error("no git user")
+                            toast.error("Please provide valid GitHub username")
                         }
                         else if (leetCode_details?.data?.errors) {
-                            toast.error("no leet user")
+                            toast.error("Please provide valid LeetCode username")
                         } else if (!monkeyType_details.status) {
-                            toast.error("no mt user")
+                            toast.error("Please provide valid Monkeytype username")
                         }
                         else {
 
                             console.log(val)
                             console.log("git", git_details);
-                            console.log("leet", leetCode_details.data.submissionCalendar);
+                            // console.log("leet", leetCode_details.data.submissionCalendar);
                             console.log("mt", monkeyType_details.data.data.personalBests.time);
 
                             // github
@@ -82,7 +81,7 @@ function UserRegisterForm() {
                             const git_Repos = await accountValidator(GIT_URL_INSTANCE, URLS.GIT.repos(val.githubUsername)) 
                             val.githubDetails.repos = git_Repos.data?.length
 
-                            // leetcode
+                            // setting more leetcode details in the database
                             await leetcodeDetails(val, leetCode_details)
 
                             // monkeytype
@@ -171,11 +170,9 @@ function UserRegisterForm() {
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-700 px-3 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-200 sm:text-sm sm:leading-6"
                                         />
                                         <ErrorMessage component={'div'} className='text-red-700' name='phoneNumber'></ErrorMessage >
-
                                     </div>
                                 </div>
-
-
+                                
 
                                 <div className="sm:col-span-3">
                                     <label htmlFor="batch" className="block text-sm  font-medium leading-6 text-slate-400">Batch</label>
@@ -235,8 +232,6 @@ function UserRegisterForm() {
 
                             </div>
                         </div>
-
-
                     </div>
 
                     <div className="mt-6 flex items-center justify-end gap-x-6">
